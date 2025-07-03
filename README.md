@@ -34,7 +34,7 @@ Organizzazione modulare del backend: Codice backend suddiviso in file PHP distin
 # Installazione
 Clona la repository:
 - git clone https://github.com/Biagem01/Orizon-travel-agency.git
-Sposta il progetto nella cartella MAMP.
+- Sposta il progetto nella cartella MAMP.
 - imposta la Document Root di Mamp in : Applications › MAMP › htdocs › Orizon-main › public
 
 # Installa le dipendenze:
