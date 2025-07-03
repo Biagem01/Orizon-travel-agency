@@ -20,8 +20,7 @@ Organizzazione modulare del backend: Codice backend suddiviso in file PHP distin
 | ------------- | ----------------------------------------- |
 | **Frontend**  | HTML5, CSS, Vanilla JavaScript            |
 | **Backend**   | PHP (senza framework)                     |
-| **Database**  | MySQL                                     |      |
-| **Hosting**   | [AwardSpace](https://www.awardspace.com/) |
+| **Database**  | MySQL                                     |      ||
 | **Local Dev** | MAMP (Apache + MySQL + PHP)               |
 
 
