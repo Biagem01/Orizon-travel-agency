@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orizon Travel Agency - Admin Panel</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Orizon Travel Agency</h1>
+            <p>Sistema di gestione viaggi sostenibili e responsabili</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <h2>Gestione Paesi</h2>
+                <form id="countryForm">
+                    <div class="form-group">
+                        <label for="countryName">Nome Paese</label>
+                        <input type="text" id="countryName" name="name" required>
+                    </div>
+                    <button type="submit">Aggiungi Paese</button>
+                    <button type="button" id="clearCountryForm" class="btn-secondary">Cancella</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Gestione Viaggi</h2>
+                <form id="travelForm">
+                    <div class="form-group">
+                        <label for="travelCountry">Paese</label>
+                        <select id="travelCountry" name="country_id" required>
+                            <option value="">Seleziona un paese...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelTitle">Titolo Viaggio</label>
+                        <input type="text" id="travelTitle" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelDescription">Descrizione</label>
+                        <textarea id="travelDescription" name="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelSeats">Posti Disponibili</label>
+                        <input type="number" id="travelSeats" name="seats_available" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelPrice">Prezzo (€)</label>
+                        <input type="number" id="travelPrice" name="price" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="travelStartDate">Data Inizio</label>
+                        <input type="date" id="travelStartDate" name="start_date">
+                    </div>
+                    <div class="form-group">
+                        <label for="travelEndDate">Data Fine</label>
+                        <input type="date" id="travelEndDate" name="end_date">
+                    </div>
+                    <button type="submit">Aggiungi Viaggio</button>
+                    <button type="button" id="clearTravelForm" class="btn-secondary">Cancella</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="filters">
+            <h3>Filtri Viaggi</h3>
+            <div class="filter-row">
+                <div class="form-group">
+                    <label for="filterCountry">Filtra per Paese</label>
+                    <select id="filterCountry">
+                        <option value="">Tutti i paesi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="filterSeats">Posti Minimi</label>
+                    <input type="number" id="filterSeats" min="0" placeholder="Es. 5">
+                </div>
+                <div class="form-group">
+                    <label for="filterSort">Ordina per</label>
+                    <select id="filterSort">
+                        <option value="">Data inizio</option>
+                        <option value="price_asc">Prezzo crescente</option>
+                        <option value="price_desc">Prezzo decrescente</option>
+                        <option value="name">Nome</option>
+                        <option value="seats_desc">Più posti</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="applyFilters">Applica Filtri</button>
+                    <button type="button" id="clearFilters" class="btn-secondary">Cancella Filtri</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-table">
+            <h2>Lista Paesi</h2>
+            <div id="countriesLoading" class="loading">Caricamento paesi...</div>
+            <div id="deleteCountrySuccess" class="status success" style="display: none; margin-top: 10px; color: green;">
+            ✅ Paese eliminato con successo!
+            </div>
+            <div id="deleteCountryError" class="status error" style="display: none; margin-top: 10px; color: red;">
+            ⚠️ Impossibile eliminare il paese: è collegato a uno o più viaggi.
+            </div>
+            <div id="deleteCountrySucces" class="status success" style="display: none; margin-top: 10px; color: green;">
+                Paese Eliminato con successo!
+            </div>
+            <table id="countriesTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Viaggi</th>
+                        <th>Data Creazione</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="countriesTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-table">
+            <h2>Lista Viaggi</h2>
+            <div id="travelsLoading" class="loading">Caricamento viaggi...</div>
+            <table id="travelsTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titolo</th>
+                        <th>Paese</th>
+                        <th>Posti</th>
+                        <th>Prezzo</th>
+                        <th>Date</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="travelsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal per modifica -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Modifica</h2>
+            <form id="editForm">
+                <div id="editFormContent">
+                </div>
+                <button type="submit">Salva Modifiche</button>
+                <button type="button" id="cancelEdit" class="btn-secondary">Annulla</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/script.js"></script>
+</body>
+</html>
