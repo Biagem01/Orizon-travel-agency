@@ -37,6 +37,7 @@ Clona la repository:
 - git clone https://github.com/Biagem01/Orizon.git
 Sposta il progetto nella cartella MAMP:
 - mv Orizon /Applications/MAMP/htdocs/
+- imposta la Document Root di Mamp in : Applications › MAMP › htdocs › Orizon-main › public
 
 # Installa le dipendenze:
 
@@ -52,9 +53,6 @@ Il progetto è composto da:
 - Un **frontend dinamico** in HTML + JavaScript.
 - Un **backend in PHP** che gestisce API REST personalizzate.
 - Un **database MySQL** per la memorizzazione dei dati.
-
-> Il progetto è stato **pubblicato online** su un servizio di **hosting gratuito**:  
-> 🌐 [http://orizon-travel.atwebpages.com/](http://orizon-travel.atwebpages.com/)
 
 Il progetto è stato sviluppato da Biagio, studente di informatica, con l'obiettivo di mettere in pratica concetti di sviluppo full stack.
 
